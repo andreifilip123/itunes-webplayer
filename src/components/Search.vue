@@ -33,7 +33,6 @@ export default {
   },
   methods: {
     readItunesLibrary () {
-      const homeDirectory = '/Users/filip/';
       const $this = this;
       $.ajax({
         type: "GET" ,
