@@ -47,7 +47,7 @@ export default {
     getArtists() {
       const $this = this;
       const library = $this.xmlDocument;
-      const allArtistKeys = $(library).find('key:contains(Artist):not(:contains( ))');
+      const allArtistKeys = $(library).find('key:contains(Sort Artist)');
       const allArtists = [];
       allArtistKeys.each((artistIndex,artistKey) => {
         let artist = $(artistKey).next().text();
@@ -66,10 +66,10 @@ export default {
       const allSongs = [];
       allSongKeys.each((songIndex,songKey) => {
         const songParent = $(songKey).parent();
-        let song = {
+        const song = {
           artist: $this.getSongProperty(songParent, 'Sort Artist'),
           album: $this.getSongProperty(songParent, 'Sort Album'),
-          title: $(songKey).next().text(),
+          title: $this.getSongProperty(songParent, 'Sort Name'),
           genre: $this.getSongProperty(songParent, 'Genre'),
           location: $this.getSongProperty(songParent, 'Location'),
           id: $this.getSongProperty(songParent, 'Track ID')
