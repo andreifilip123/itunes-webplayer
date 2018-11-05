@@ -13,9 +13,6 @@
 import $ from 'jquery';
 export default {
   name: 'Search',
-  props: {
-    msg: String,
-  },
   mounted() {
     this.readItunesLibrary();
   },
