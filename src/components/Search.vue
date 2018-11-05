@@ -19,6 +19,11 @@ export default {
   mounted() {
     this.readItunesLibrary();
   },
+  filters: {
+    highlightQuery(string,query) {
+      return string.replace(query, `<span class="highlight">${query}</span>`);
+    }
+  },
   data() {
     return {
       xmlDocument: '',
