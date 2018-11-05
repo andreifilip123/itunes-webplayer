@@ -12,7 +12,7 @@
 <script>
 import $ from 'jquery';
 export default {
-  name: 'HelloWorld',
+  name: 'Search',
   props: {
     msg: String,
   },
