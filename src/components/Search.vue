@@ -5,7 +5,6 @@
     <a v-for="item in results" :key="item.id" :href="item.location" class="song__item">
       <p><span class="song__title">{{item.title}}</span> - <span class="song__artist">{{item.artist}}</span></p>
       <p><span class="song__album">{{item.album}}</span></p>
-
     </a>
   </div>
 </template>
@@ -115,14 +114,31 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="stylus">
 .search {
-  font-size: 20px;
+  display: block;
+  width: 100%;
+  max-width: 80%;
+  margin: 0 auto;
   padding: 10px;
+  font-size: 20px;
+  text-align: center;
 }
 
 .song {
   &__item {
-    color: #000000;
+    display: block;
+    max-width: 80%;
+    margin: 10px auto;
+    padding: 10px;
+    background-color: darkgray;
+    border: 1px solid #cccccc;
+    color: #ffffff;
     text-decoration: none;
+  }
+
+  @supports(linear-gradient) {
+    .song__item {
+      background-color: linear-gradient(to right, #cf8188, #90c2d9);
+    }
   }
 
   &__title {
