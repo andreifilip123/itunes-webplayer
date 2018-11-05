@@ -1,5 +1,12 @@
 <template>
-    <p>Work in progress</p>
+  <div class="align-middle align-center">
+    <h3>Basic search functionality</h3>
+    <input type="text" @change="generalSearch" @input="generalSearch" class="search">
+    <div v-for="item in results" :key="item.id">
+      <p><span class="song__title">{{item.title}}</span> - <span class="song__artist">{{item.artist}}</span></p>
+      <p><span class="song__album">{{item.album}}</span></p>
+
+    </div>
   </div>
 </template>
 
@@ -19,7 +26,8 @@ export default {
       artists: [],
       songs: [],
       albums: [],
-      library: []
+      library: [],
+      results: []
     };
   },
   methods: {
@@ -63,7 +71,8 @@ export default {
           album: $this.getSongProperty(songParent, 'Sort Album'),
           title: $(songKey).next().text(),
           genre: $this.getSongProperty(songParent, 'Genre'),
-          location: $this.getSongProperty(songParent, 'Location')
+          location: $this.getSongProperty(songParent, 'Location'),
+          id: $this.getSongProperty(songParent, 'Track ID')
         };
         allSongs.push(song);
       });
@@ -88,6 +97,16 @@ export default {
       $this.getSongs();
       library.push(...$this.songs);
       $this.$set($this, 'library', library);
+    },
+    generalSearch(event) {
+      const $this = this;
+      const library = $this.library;
+      const query = event.target.value.toLowerCase();
+      let results = [];
+      if(query != '') {
+        results = library.filter(song => song.title.toLowerCase().includes(query) || song.artist.toLowerCase().includes(query) || song.album.toLowerCase().includes(query));
+      }
+      $this.$set($this, 'results', results);
     }
   }
 };
@@ -95,17 +114,26 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="stylus">
-h3
-  margin 40px 0 0
+.search {
+  font-size: 20px;
+  padding: 10px;
+}
 
-ul
-  list-style-type none
-  padding 0
+.song {
+  &__title {
+    font-size: 20px;
+    font-weight: 900;
+  }
 
-li
-  display inline-block
-  margin 0 10px
+  &__artist {
+    font-size: 20px;
+    font-weight: 700;
+  }
 
-a
-  color #42b983
+  &__album {
+    font-size: 16px;
+    font-weight: 500;
+  }
+}
+
 </style>
