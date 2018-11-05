@@ -1,12 +1,12 @@
 <template>
   <div class="align-middle align-center">
     <h3>Basic search functionality</h3>
-    <input type="text" @change="generalSearch" @input="generalSearch" class="search">
-    <div v-for="item in results" :key="item.id">
+    <input type="text" @input="generalSearch" class="search">
+    <a v-for="item in results" :key="item.id" :href="item.location" class="song__item">
       <p><span class="song__title">{{item.title}}</span> - <span class="song__artist">{{item.artist}}</span></p>
       <p><span class="song__album">{{item.album}}</span></p>
 
-    </div>
+    </a>
   </div>
 </template>
 
@@ -120,6 +120,11 @@ export default {
 }
 
 .song {
+  &__item {
+    color: #000000;
+    text-decoration: none;
+  }
+
   &__title {
     font-size: 20px;
     font-weight: 900;
