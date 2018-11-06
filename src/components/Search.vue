@@ -2,10 +2,12 @@
   <div class="align-middle align-center">
     <h3>Basic search functionality</h3>
     <input type="text" @input="generalSearch" class="search">
-    <a v-for="item in results" :key="item.id" :href="item.location" class="song__item">
-      <p><span class="song__title">{{item.title}}</span> - <span class="song__artist">{{item.artist}}</span></p>
-      <p class="song__album">{{item.album}}</p>
-    </a>
+    <div class="song__item-wrapper" v-for="item in results" :key="item.id">
+      <a :href="item.location" class="song__item">
+        <p><span class="song__title">{{item.title}}</span> - <span class="song__artist">{{item.artist}}</span></p>
+        <p class="song__album">{{item.album}}</p>
+      </a>
+    </div>
   </div>
 </template>
 
@@ -127,18 +129,34 @@ export default {
 .song {
   &__item {
     display: block;
-    max-width: 80%;
-    margin: 10px auto;
     padding: 10px;
-    background-color: darkgray;
-    border: 1px solid #cccccc;
+    background: darkgray;
+    background: linear-gradient(to bottom right, #FF5E50, #FC5C72, #E34DA4, #9A50F8, #4A9FFB, #29CAF9);
+    filter: grayscale(75%);
     color: #ffffff;
     text-decoration: none;
+
+    &-wrapper {
+      max-width: 80%;
+      margin: 10px auto;
+      border-width: 8px;
+      border-style: solid;
+      filter: grayscale(25%);
+      border-image: linear-gradient(to bottom right, #FF5E50, #FC5C72, #E34DA4, #9A50F8, #4A9FFB, #29CAF9) 1 1;
+
+      &:hover {
+        filter: grayscale(0%);
+      }
+    }
+
+    &:hover {
+      background: linear-gradient(to bottom right, #FF5E50, #FC5C72, #E34DA4, #9A50F8, #4A9FFB, #29CAF9);
+      filter: grayscale(0%);
+    }
   }
 
   @supports(linear-gradient) {
     .song__item {
-      background-color: linear-gradient(to right, #cf8188, #90c2d9);
     }
   }
 
