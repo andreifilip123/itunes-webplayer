@@ -13,102 +13,32 @@
 
 <script>
 import $ from 'jquery';
+import { mapState, mapActions } from "vuex";
 export default {
   name: 'Search',
-  mounted() {
-    this.readItunesLibrary();
-  },
   filters: {
     highlightQuery(string,query) {
       return string.replace(query, `<span class="highlight">${query}</span>`);
     }
   },
-  data() {
-    return {
-      xmlDocument: '',
-      artists: [],
-      songs: [],
-      albums: [],
-      library: [],
-      results: []
-    };
+  computed: {
+    ...mapState([
+      'songs',
+      'results',
+    ])
   },
   methods: {
-    readItunesLibrary () {
-      const $this = this;
-      $.ajax({
-        type: "GET" ,
-        url: "iTunes Music Library.xml" ,
-        dataType: "xml" ,
-        success: function(xml) {
-          $this.$set($this, 'xmlDocument', xml);
-          $this.getLibrary();
-        }
-      });
-    },
-    getArtists() {
-      const $this = this;
-      const library = $this.xmlDocument;
-      const allArtistKeys = $(library).find('key:contains(Sort Artist)');
-      const allArtists = [];
-      allArtistKeys.each((artistIndex,artistKey) => {
-        let artist = $(artistKey).next().text();
-        allArtists.push(artist);
-      });
-      const uniqueArtists = [...new Set(allArtists)];
-      $this.$set($this, 'artists', uniqueArtists);
-    },
-    getSongProperty(song, property) {
-      return song.find(`key:contains(${property})`).next().text();
-    },
-    getSongs() {
-      const $this = this;
-      const library = $this.xmlDocument;
-      const allSongKeys = $(library).find('key:contains(Sort Name)');
-      const allSongs = [];
-      allSongKeys.each((songIndex,songKey) => {
-        const songParent = $(songKey).parent();
-        const song = {
-          artist: $this.getSongProperty(songParent, 'Sort Artist'),
-          album: $this.getSongProperty(songParent, 'Sort Album'),
-          title: $this.getSongProperty(songParent, 'Sort Name'),
-          genre: $this.getSongProperty(songParent, 'Genre'),
-          location: $this.getSongProperty(songParent, 'Location'),
-          id: $this.getSongProperty(songParent, 'Track ID')
-        };
-        allSongs.push(song);
-      });
-      const uniqueSongs = [...new Set(allSongs)];
-      $this.$set($this, 'songs', uniqueSongs);
-    },
-    getAlbums() {
-      const $this = this;
-      const library = $this.xmlDocument;
-      const allAlbumKeys = $(library).find('key:contains(Sort Album)');
-      const allAlbums = [];
-      allAlbumKeys.each((albumIndex,albumKey) => {
-        let album = $(albumKey).next().text();
-        allAlbums.push(album);
-      });
-      const uniqueAlbums = [...new Set(allAlbums)];
-      $this.$set($this, 'albums', uniqueAlbums);
-    },
-    getLibrary() {
-      const $this = this;
-      const library = [];
-      $this.getSongs();
-      library.push(...$this.songs);
-      $this.$set($this, 'library', library);
-    },
+    ...mapActions([
+      'setResults'
+    ]),
     generalSearch(event) {
-      const $this = this;
-      const library = $this.library;
+      const library = this.songs;
       const query = event.target.value.toLowerCase();
       let results = [];
       if(query != '') {
         results = library.filter(song => song.title.toLowerCase().includes(query) || song.artist.toLowerCase().includes(query) || song.album.toLowerCase().includes(query));
       }
-      $this.$set($this, 'results', results);
+      this.setResults(results);
     }
   }
 };
