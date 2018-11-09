@@ -14,5 +14,8 @@ export const actions = {
   },
   setResults: (context, payload) => {
     context.commit('setResults', payload);
+  },
+  changeLibrary: (context, payload) => {
+    context.commit('changeLibrary', payload);
   }
 };

@@ -6,9 +6,9 @@
 import { mapActions, mapState, mapGetters } from 'vuex';
 
 export default {
-  name: 'albums',
+  name: 'genres',
   mounted() {
-    this.changeLibrary('album');
+    this.changeLibrary('genre');
   },
   methods: {
     ...mapActions([
@@ -17,3 +17,8 @@ export default {
   }
 }
 </script>
+
+<style lang="stylus">
+
+</style>
+

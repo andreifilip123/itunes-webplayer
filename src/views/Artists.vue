@@ -1,9 +1,5 @@
 <template>
-  <div class="artists__container">
-    <div class="artist__item" v-for="artist in artists" :key="artist">
-      {{ artist }}
-    </div>
-  </div>
+
 </template>
 
 <script>
@@ -11,17 +7,13 @@ import { mapActions, mapState, mapGetters } from 'vuex';
 
 export default {
   name: 'artists',
-  computed: {
-    ...mapGetters([
-      'artists'
-    ])
+  mounted() {
+    this.changeLibrary('artist');
   },
   methods: {
+    ...mapActions([
+      'changeLibrary'
+    ])
   }
 }
 </script>
-
-<style lang="stylus">
-
-</style>
-
