@@ -18,5 +18,14 @@ export const getters = {
     const allSongs = state.library.map(song => song.title);
     const uniqueSongs = [...new Set(allSongs)];
     return uniqueSongs.sort();
-  }
+  },
+  genreSongs: state => genre => {
+    return state.library.filter(song => song.genre == genre);
+  },
+  artistSongs(state, artist) {
+    return state.library.filter(song => song.artist == artist);
+  },
+  albumSongs(state, album) {
+    return state.library.filter(song => song.album == album);
+  },
 };
