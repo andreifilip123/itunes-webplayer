@@ -7,7 +7,7 @@ export const mutations = {
   parseLibrary: (state) => {
     const library = state.xmlDocument;
     const allSongKeys = $(library).find('key:contains(Sort Name)');
-    const allSongs = [];
+    const allLibrary = [];
     allSongKeys.each((songIndex, songKey) => {
       const songParent = $(songKey).parent();
       const song = {
@@ -18,10 +18,20 @@ export const mutations = {
         location: $(songParent).find('key:contains(Location)').next().text(),
         id: $(songParent).find('key:contains(Track ID)').next().text()
       };
-      allSongs.push(song);
+      if (song.genre !== 'Podcast') {
+        allLibrary.push(song);
+      }
     });
-    const uniqueSongs = [...new Set(allSongs)];
-    state.songs = uniqueSongs;
+    const allLibrarySorted = allLibrary.sort((a, b) => {
+      if (a.title > b.title) {
+        return 1;
+      } else if (a.title < b.title) {
+        return -1;
+      }
+      return 0;
+    });
+    const uniqueLibrary = [...new Set(allLibrarySorted)];
+    state.library = uniqueLibrary;
   },
   setSongs: (state, payload) => {
     state.songs = payload;
