@@ -1,21 +1,46 @@
 <template>
   <div class="home">
-    <img alt="iTunes logo" src="../assets/itunes.png">
-    <Search/>
-    <ItunesLibrary/>
+    <div class="row">
+      <div class="columns large-12">
+        <div class="align-middle align-center">
+          <img src="../assets/itunes-large.png">
+          <h3 class="home__heading">A small webplayer for iTunes</h3>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import Search from '@/components/Search.vue';
-import ItunesLibrary from '@/components/ItunesLibrary.vue';
-
+import { mapActions } from "vuex";
 export default {
   name: 'home',
-  components: {
-    Search,
-    ItunesLibrary
+  mounted() {
+    console.log("Home: Mounted");
+    this.changeActiveView('');
+    console.log("Home: Change library");
+    this.resetResults();
+    console.log("Home: Reset results");
   },
+  methods: {
+    ...mapActions([
+      'changeActiveView',
+      'resetResults',
+    ])
+  }
 };
 </script>
+
+<style lang="stylus">
+
+.home {
+  margin-top: 50px;
+  text-align: center;
+
+  &__heading {
+    background: linear-gradient(to bottom right, #FF5E50, #FC5C72, #E34DA4, #9A50F8, #4A9FFB, #29CAF9) 1 1;
+    margin-top: 30px;
+  }
+}
+
+</style>
