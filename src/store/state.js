@@ -1,5 +1,6 @@
 export const state = {
   xmlDocument: '',
-  songs: [],
-  results: []
+  library: [],
+  results: [],
+  activeView: ''
 };

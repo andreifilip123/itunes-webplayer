@@ -16,7 +16,7 @@ export default {
   },
   mounted() {
     this.resetResults();
-    this.changeLibrary('');
+    this.changeActiveView('');
   },
   computed: {
     ...mapState([
@@ -28,7 +28,7 @@ export default {
   methods: {
     ...mapActions([
       'setResults',
-      'changeLibrary',
+      'changeActiveView',
       'resetResults'
     ]),
     generalSearch(event) {
@@ -47,6 +47,7 @@ export default {
               song.title.toLowerCase().includes(query)
           });
         }
+        this.resetResults();
         this.setResults(results);
       } else {
         console.log("Empty query");

@@ -28,5 +28,33 @@ export const mutations = {
   },
   setResults: (state, payload) => {
     state.results = payload;
+  },
+  changeActiveView: (state, payload) => {
+    state.activeView = payload;
+  },
+  resetResults: (state) => {
+    // Sort results
+    const results = state.library.sort((a, b) => {
+      if (a[state.activeView] > b[state.activeView]) {
+        return 1;
+      } else if (a[state.activeView] < b[state.activeView]) {
+        return -1;
+      }
+      return 0;
+    });
+    // Make results unique
+    const uniqueResults = [];
+    results.forEach(result => {
+      let resultExists = false;
+      uniqueResults.forEach(item => {
+        if (item[state.activeView] == result[state.activeView]) {
+          resultExists = true;
+        }
+      });
+      if (!resultExists) {
+        uniqueResults.push(result);
+      }
+    });
+    state.results = uniqueResults;
   }
 };

@@ -8,11 +8,16 @@ import { mapActions, mapState, mapGetters } from 'vuex';
 export default {
   name: 'songs',
   mounted() {
-    this.changeLibrary('title');
+    console.log("Songs: Mounted");
+    this.changeActiveView('title');
+    console.log("Songs: Change library");
+    this.resetResults();
+    console.log("Songs: Reset results");
   },
   methods: {
     ...mapActions([
-      'changeLibrary'
+      'changeActiveView',
+      'resetResults',
     ])
   }
 }

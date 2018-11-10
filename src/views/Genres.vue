@@ -8,11 +8,16 @@ import { mapActions, mapState, mapGetters } from 'vuex';
 export default {
   name: 'genres',
   mounted() {
-    this.changeLibrary('genre');
+    console.log("Genres: Mounted");
+    this.changeActiveView('genre');
+    console.log("Genres: Change library");
+    this.resetResults();
+    console.log("Genres: Reset results");
   },
   methods: {
     ...mapActions([
-      'changeLibrary'
+      'changeActiveView',
+      'resetResults',
     ])
   }
 }
