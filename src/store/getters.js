@@ -22,10 +22,10 @@ export const getters = {
   genreSongs: state => genre => {
     return state.library.filter(song => song.genre == genre);
   },
-  artistSongs(state, artist) {
+  artistSongs: state => artist => {
     return state.library.filter(song => song.artist == artist);
   },
-  albumSongs(state, album) {
+  albumSongs: state => album => {
     return state.library.filter(song => song.album == album);
   },
 };
