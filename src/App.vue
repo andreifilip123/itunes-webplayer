@@ -21,25 +21,48 @@
     </div>
     <div v-for="item in results" :key="item.id">
       <div class="song__item-wrapper" v-if="activeView == 'genre'">
-        <a :href="item.location" class="song__item">
-          <p class="song__title">{{item.genre}}</p>
-        </a>
+        <div class="accordion">
+          <a href="javascript:void(0);" class="accordion__title" data-accordion-title>{{item.genre}}</a>
+          <div class="accordion__content" data-accordion-content>
+            <div class="accordion__item" v-for="song in genreSongs(item.genre)" :key="song.id">
+              <a :href="song.location" class="song__item">
+                <p><span class="song__title">{{song.title}}</span> - <span class="song__artist">{{song.artist}}</span></p>
+                <p class="song__album">{{song.album}}</p>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="song__item-wrapper" v-else-if="activeView == 'artist'">
+        <div class="accordion">
+          <a href="javascript:void(0);" class="accordion__title" data-accordion-title>{{item.artist}}</a>
+          <div class="accordion__content" data-accordion-content>
+            <div class="accordion__item" v-for="song in artistSongs(item.artist)" :key="song.id">
+              <a :href="song.location" class="song__item">
+                <p><span class="song__title">{{song.title}}</span> - <span class="song__artist">{{song.artist}}</span></p>
+                <p class="song__album">{{song.album}}</p>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="song__item-wrapper" v-else-if="activeView == 'album'">
+        <div class="accordion">
+          <a href="javascript:void(0);" class="accordion__title" data-accordion-title>{{item.album}}</a>
+          <div class="accordion__content" data-accordion-content>
+            <div class="accordion__item" v-for="song in albumSongs(item.album)" :key="song.id">
+              <a :href="song.location" class="song__item">
+                <p><span class="song__title">{{song.title}}</span> - <span class="song__artist">{{song.artist}}</span></p>
+                <p class="song__album">{{song.album}}</p>
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="song__item-wrapper" v-else-if="activeView == 'title'">
         <a :href="item.location" class="song__item">
           <p><span class="song__title">{{item.title}}</span> - <span class="song__artist">{{item.artist}}</span></p>
           <p class="song__album">{{item.album}}</p>
-        </a>
-      </div>
-      <div class="song__item-wrapper" v-else-if="activeView == 'album'">
-        <a :href="item.location" class="song__item">
-          <p class="song__title">{{item.album}}</p>
-          <p class="song__album">{{item.album}}</p>
-        </a>
-      </div>
-      <div class="song__item-wrapper" v-else-if="activeView == 'artist'">
-        <a :href="item.location" class="song__item">
-          <p class="song__title">{{item.artist}}</p>
         </a>
       </div>
     </div>
@@ -50,19 +73,35 @@
 <script>
 import Search from '@/components/Search.vue';
 import ItunesLibrary from '@/components/ItunesLibrary.vue';
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
+import $ from 'jquery';
 export default {
   name: 'app',
   computed: {
     ...mapState([
       'results',
-      'activeView'
+      'activeView',
+    ]),
+    ...mapGetters([
+      'genreSongs',
+      'artistSongs',
+      'albumSongs',
     ])
   },
   components: {
     Search,
-    ItunesLibrary
+    ItunesLibrary,
   },
+  mounted() {
+    $(document).on('click', '[data-accordion-title]', function(e){
+      e.preventDefault();
+      const $accordionTitle = $(this);
+      const $accordionContent = $accordionTitle.next();
+      
+      $accordionContent.toggleClass('show');
+      $accordionContent.slideToggle(350);
+    });
+  }
 }
 </script>
 
@@ -130,6 +169,24 @@ export default {
   &__album {
     font-size: 16px;
     font-weight: 500;
+  }
+}
+
+.accordion {
+  &__title {
+    padding: 0 20px;
+    font-size: 20px;
+    font-weight: 900; 
+  }
+
+  &__content {
+    padding: 0 20px;
+    overflow: hidden;
+    display: none;
+  }
+
+  &__item {
+    margin: 10px;
   }
 }
 </style>
