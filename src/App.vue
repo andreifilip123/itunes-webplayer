@@ -65,6 +65,12 @@
           <p class="song__album">{{item.album}}</p>
         </a>
       </div>
+      <div class="song__item-wrapper" v-else-if="activeView == ''">
+        <a :href="item.location" class="song__item">
+          <p><span class="song__title">{{item.title}}</span> - <span class="song__artist">{{item.artist}}</span></p>
+          <p class="song__album">{{item.album}}</p>
+        </a>
+      </div>
     </div>
     <router-view/>
   </div>

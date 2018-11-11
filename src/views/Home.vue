@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home" v-if="resultsEmpty">
     <div class="row">
       <div class="columns large-12">
         <div class="align-middle align-center">
@@ -12,9 +12,17 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 export default {
   name: 'home',
+  computed: {
+    ...mapState([
+      'results'
+    ]),
+    resultsEmpty() {
+      return !Array.isArray(this.results) || !this.results.length
+    }
+  },
   mounted() {
     console.log("Home: Mounted");
     this.changeActiveView('');
