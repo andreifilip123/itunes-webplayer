@@ -61,7 +61,7 @@ export const mutations = {
           resultExists = true;
         }
       });
-      if (!resultExists) {
+      if (!resultExists && state.activeView) {
         uniqueResults.push(result);
       }
     });
