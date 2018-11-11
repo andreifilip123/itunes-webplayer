@@ -39,13 +39,7 @@ export default {
         if(this.activeView) {
           results = library.filter(song => song[this.activeView].toLowerCase().includes(query));
         } else {
-          results = library.filter(song => {
-            return 
-              song.genre.toLowerCase().includes(query) ||
-              song.artist.toLowerCase().includes(query) || 
-              song.album.toLowerCase().includes(query) ||
-              song.title.toLowerCase().includes(query)
-          });
+          results = library.filter(song => song.genre.toLowerCase().includes(query) || song.artist.toLowerCase().includes(query) || song.album.toLowerCase().includes(query) || song.title.toLowerCase().includes(query));
         }
         this.resetResults();
         this.setResults(results);
