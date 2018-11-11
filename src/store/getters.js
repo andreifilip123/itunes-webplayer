@@ -19,13 +19,7 @@ export const getters = {
     const uniqueSongs = [...new Set(allSongs)];
     return uniqueSongs.sort();
   },
-  genreSongs: state => genre => {
-    return state.library.filter(song => song.genre == genre);
-  },
-  artistSongs: state => artist => {
-    return state.library.filter(song => song.artist == artist);
-  },
-  albumSongs: state => album => {
-    return state.library.filter(song => song.album == album);
-  },
+  genreSongs: state => genre => state.library.filter(song => song.genre == genre),
+  artistSongs: state => artist => state.library.filter(song => song.artist == artist),
+  albumSongs: state => album => state.library.filter(song => song.album == album),
 };
