@@ -12,12 +12,16 @@ export default {
     this.changeActiveView('album');
     console.log("Albums: Change library");
     this.resetResults();
+    this.makeResultsUnique();
+    this.sortResults();
     console.log("Albums: Reset results");
   },
   methods: {
     ...mapActions([
       'changeActiveView',
       'resetResults',
+      'makeResultsUnique',
+      'sortResults',
     ])
   }
 }

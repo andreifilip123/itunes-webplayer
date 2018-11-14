@@ -43,28 +43,41 @@ export const mutations = {
     state.activeView = payload;
   },
   resetResults: (state) => {
-    // Sort results
-    const results = state.library.sort((a, b) => {
-      if (a[state.activeView] > b[state.activeView]) {
+    state.results = state.library;
+  },
+  sortResults: state => {
+    const results = state.results.sort((a, b) => {
+      if (state.activeView) {
+        if (a[state.activeView] > b[state.activeView]) {
+          return 1;
+        } else if (a[state.activeView] < b[state.activeView]) {
+          return -1;
+        }
+        return 0;
+      }
+      if (a.title > b.title) {
         return 1;
-      } else if (a[state.activeView] < b[state.activeView]) {
+      } else if (a.title < b.title) {
         return -1;
       }
       return 0;
     });
-    // Make results unique
-    const uniqueResults = [];
-    results.forEach(result => {
-      let resultExists = false;
-      uniqueResults.forEach(item => {
-        if (item[state.activeView] == result[state.activeView]) {
-          resultExists = true;
+    state.results = results;
+  },
+  makeResultsUnique: (state) => {
+    const unique = [
+      ...new Set(state.results.map(item => {
+        if (state.activeView) {
+          return item[state.activeView];
         }
-      });
-      if (!resultExists && state.activeView) {
-        uniqueResults.push(result);
-      }
-    });
-    state.results = uniqueResults;
+        return item.title;
+      }))]
+      .map(itemProperty => state.results.find(item => {
+        if (state.activeView) {
+          return item[state.activeView] == itemProperty;
+        }
+        return item.title == itemProperty;
+      }));
+    state.results = unique;
   }
 };

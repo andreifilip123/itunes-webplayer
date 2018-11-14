@@ -12,12 +12,16 @@ export default {
     this.changeActiveView('genre');
     console.log("Genres: Change library");
     this.resetResults();
+    this.makeResultsUnique();
+    this.sortResults();
     console.log("Genres: Reset results");
   },
   methods: {
     ...mapActions([
       'changeActiveView',
       'resetResults',
+      'makeResultsUnique',
+      'sortResults',
     ])
   }
 }

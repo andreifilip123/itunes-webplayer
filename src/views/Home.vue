@@ -28,12 +28,16 @@ export default {
     this.changeActiveView('');
     console.log("Home: Change library");
     this.resetResults();
+    this.makeResultsUnique();
+    this.sortResults();
     console.log("Home: Reset results");
   },
   methods: {
     ...mapActions([
       'changeActiveView',
       'resetResults',
+      'makeResultsUnique',
+      'sortResults',
     ])
   }
 };

@@ -11,13 +11,17 @@ export default {
     console.log("Artists: Mounted");
     this.changeActiveView('artist');
     console.log("Artists: Change library");
-    this.resetResults()
+    this.resetResults();
+    this.makeResultsUnique();
+    this.sortResults();
     console.log("Artists: Reset results");
   },
   methods: {
     ...mapActions([
       'changeActiveView',
-      'resetResults'
+      'resetResults',
+      'makeResultsUnique',
+      'sortResults',
     ])
   }
 }

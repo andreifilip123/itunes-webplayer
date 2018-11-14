@@ -29,7 +29,9 @@ export default {
     ...mapActions([
       'setResults',
       'changeActiveView',
-      'resetResults'
+      'resetResults',
+      'makeResultsUnique',
+      'sortResults',
     ]),
     generalSearch(event) {
       const library = this.library;
@@ -43,9 +45,13 @@ export default {
         }
         this.resetResults();
         this.setResults(results);
+        this.makeResultsUnique();
+        this.sortResults();
       } else {
         console.log("Empty query");
         this.resetResults();
+        this.makeResultsUnique();
+        this.sortResults();
       }
     }
   }

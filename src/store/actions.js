@@ -20,5 +20,11 @@ export const actions = {
   },
   resetResults: (context) => {
     context.commit('resetResults');
+  },
+  makeResultsUnique: (context) => {
+    context.commit('makeResultsUnique');
+  },
+  sortResults: (context) => {
+    context.commit('sortResults');
   }
 };
