@@ -1,20 +1,20 @@
 <template>
-
+  <div></div>
 </template>
 
 <script>
-import { mapActions, mapState, mapGetters } from 'vuex';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'albums',
   mounted() {
-    console.log("Albums: Mounted");
+    console.log('Albums: Mounted');
     this.changeActiveView('album');
-    console.log("Albums: Change library");
+    console.log('Albums: Change library');
     this.resetResults();
     this.makeResultsUnique();
     this.sortResults();
-    console.log("Albums: Reset results");
+    console.log('Albums: Reset results');
   },
   methods: {
     ...mapActions([
@@ -24,5 +24,5 @@ export default {
       'sortResults',
     ])
   }
-}
+};
 </script>

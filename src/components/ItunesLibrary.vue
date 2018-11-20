@@ -1,5 +1,5 @@
 <template>
-  
+  <div></div>
 </template>
 
 <script>
@@ -15,5 +15,5 @@ export default {
       'readItunesLibrary',
     ])
   }
-}
+};
 </script>

@@ -59,6 +59,7 @@
 <script>
 import { mapState, mapGetters } from 'vuex';
 import $ from 'jquery';
+
 export default {
   name: 'results',
   computed: {
@@ -73,11 +74,13 @@ export default {
     ])
   },
   mounted() {
-    $(document).on('click', '[data-accordion-title]', function(e){
+    /* eslint-disable func-names */
+    $(document).on('click', '[data-accordion-title]', function(e) {
+    /* eslint-enable func-names */
       e.preventDefault();
       const $accordionTitle = $(this);
       const $accordionContent = $accordionTitle.next();
-      
+
       $accordionContent.toggleClass('show');
       $accordionContent.slideToggle(350);
     });
@@ -93,7 +96,7 @@ export default {
       return 'https://www.youtube.com/results?search_query=' + this.escapeSpaces(song.title) + '+' + this.escapeSpaces(song.artist) + '&page=&utm_source=opensearch';
     },
   }
-}
+};
 </script>
 
 <style lang="stylus">
@@ -145,7 +148,7 @@ export default {
   &__title {
     padding: 0 20px;
     font-size: 20px;
-    font-weight: 900; 
+    font-weight: 900;
   }
 
   &__content {

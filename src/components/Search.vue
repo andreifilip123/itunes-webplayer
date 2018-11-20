@@ -5,12 +5,12 @@
 </template>
 
 <script>
-import $ from 'jquery';
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions } from 'vuex';
+
 export default {
   name: 'Search',
   filters: {
-    highlightQuery(string,query) {
+    highlightQuery(string, query) {
       return string.replace(query, `<span class="highlight">${query}</span>`);
     }
   },
@@ -34,11 +34,11 @@ export default {
       'sortResults',
     ]),
     generalSearch(event) {
-      const library = this.library;
+      const { library } = this;
       const query = event.target.value.toLowerCase();
       let results = [];
-      if(query != '') {
-        if(this.activeView) {
+      if (query != '') {
+        if (this.activeView) {
           results = library.filter(song => song[this.activeView].toLowerCase().includes(query));
         } else {
           results = library.filter(song => song.genre.toLowerCase().includes(query) || song.artist.toLowerCase().includes(query) || song.album.toLowerCase().includes(query) || song.title.toLowerCase().includes(query));
@@ -48,7 +48,7 @@ export default {
         this.makeResultsUnique();
         this.sortResults();
       } else {
-        console.log("Empty query");
+        console.log('Empty query');
         this.resetResults();
         this.makeResultsUnique();
         this.sortResults();

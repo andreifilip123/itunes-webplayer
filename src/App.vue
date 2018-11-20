@@ -26,8 +26,9 @@
 
 <script>
 import Search from '@/components/Search.vue';
-import Results from "@/components/Results.vue";
+import Results from '@/components/Results.vue';
 import ItunesLibrary from '@/components/ItunesLibrary.vue';
+
 export default {
   name: 'app',
   components: {
@@ -35,7 +36,7 @@ export default {
     ItunesLibrary,
     Results,
   },
-}
+};
 </script>
 
 

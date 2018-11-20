@@ -1,20 +1,20 @@
 <template>
-
+  <div></div>
 </template>
 
 <script>
-import { mapActions, mapState, mapGetters } from 'vuex';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'genres',
   mounted() {
-    console.log("Genres: Mounted");
+    console.log('Genres: Mounted');
     this.changeActiveView('genre');
-    console.log("Genres: Change library");
+    console.log('Genres: Change library');
     this.resetResults();
     this.makeResultsUnique();
     this.sortResults();
-    console.log("Genres: Reset results");
+    console.log('Genres: Reset results');
   },
   methods: {
     ...mapActions([
@@ -24,7 +24,7 @@ export default {
       'sortResults',
     ])
   }
-}
+};
 </script>
 
 <style lang="stylus">

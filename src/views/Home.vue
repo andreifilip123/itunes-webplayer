@@ -12,7 +12,8 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapState } from 'vuex';
+
 export default {
   name: 'home',
   computed: {
@@ -20,17 +21,17 @@ export default {
       'results'
     ]),
     resultsEmpty() {
-      return !Array.isArray(this.results) || !this.results.length
+      return !Array.isArray(this.results) || !this.results.length;
     }
   },
   mounted() {
-    console.log("Home: Mounted");
+    console.log('Home: Mounted');
     this.changeActiveView('');
-    console.log("Home: Change library");
+    console.log('Home: Change library');
     this.resetResults();
     this.makeResultsUnique();
     this.sortResults();
-    console.log("Home: Reset results");
+    console.log('Home: Reset results');
   },
   methods: {
     ...mapActions([
