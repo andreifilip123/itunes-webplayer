@@ -4,19 +4,41 @@ export const mutations = {
   setXmlDocument(state, payload) {
     state.xmlDocument = payload;
   },
-  parseLibrary: (state) => {
+  parseLibrary: state => {
     const library = state.xmlDocument;
     const allSongKeys = $(library).find('key:contains(Sort Name)');
     const allLibrary = [];
     allSongKeys.each((songIndex, songKey) => {
       const songParent = $(songKey).parent();
       const song = {
-        artist: $(songParent).find('key:contains(Sort Artist)').next().text(),
-        album: $(songParent).find('key:contains(Sort Album)').next().text(),
-        title: $(songParent).find('key:contains(Sort Name)').next().text(),
-        genre: $(songParent).find('key:contains(Genre)').next().text(),
-        location: $(songParent).find('key:contains(Location)').next().text(),
-        id: $(songParent).find('key:contains(Track ID)').next().text()
+        artist: $(songParent)
+          .find('key:contains(Sort Artist)')
+          .next()
+          .text(),
+        album: $(songParent)
+          .find('key:contains(Sort Album)')
+          .next()
+          .text(),
+        title: $(songParent)
+          .find('key:contains(Sort Name)')
+          .next()
+          .text(),
+        genre: $(songParent)
+          .find('key:contains(Genre)')
+          .next()
+          .text(),
+        year: $(songParent)
+          .find('key:contains(Year)')
+          .next()
+          .text(),
+        location: $(songParent)
+          .find('key:contains(Location)')
+          .next()
+          .text(),
+        id: $(songParent)
+          .find('key:contains(Track ID)')
+          .next()
+          .text()
       };
       if (song.genre !== 'Podcast') {
         allLibrary.push(song);
@@ -42,7 +64,7 @@ export const mutations = {
   changeActiveView: (state, payload) => {
     state.activeView = payload;
   },
-  resetResults: (state) => {
+  resetResults: state => {
     state.results = state.library;
   },
   sortResults: state => {
@@ -64,15 +86,16 @@ export const mutations = {
     });
     state.results = results;
   },
-  makeResultsUnique: (state) => {
+  makeResultsUnique: state => {
     const unique = [
       ...new Set(state.results.map(item => {
         if (state.activeView) {
           return item[state.activeView];
         }
         return item.title;
-      }))]
-      .map(itemProperty => state.results.find(item => {
+      }))
+    ].map(itemProperty =>
+      state.results.find(item => {
         if (state.activeView) {
           return item[state.activeView] == itemProperty;
         }

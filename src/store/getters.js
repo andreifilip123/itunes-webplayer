@@ -19,7 +19,13 @@ export const getters = {
     const uniqueSongs = [...new Set(allSongs)];
     return uniqueSongs.sort();
   },
+  years(state) {
+    const allYears = state.library.map(song => song.year);
+    const uniqueYears = [...new Set(allYears)];
+    return uniqueYears.sort();
+  },
   genreSongs: state => genre => state.library.filter(song => song.genre == genre),
   artistSongs: state => artist => state.library.filter(song => song.artist == artist),
   albumSongs: state => album => state.library.filter(song => song.album == album),
+  yearSongs: state => year => state.library.filter(song => song.year == year)
 };

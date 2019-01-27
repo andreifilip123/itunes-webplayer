@@ -5,6 +5,7 @@ import Genres from './views/Genres.vue';
 import Artists from './views/Artists.vue';
 import Albums from './views/Albums.vue';
 import Songs from './views/Songs.vue';
+import Years from './views/Years.vue';
 
 Vue.use(Router);
 
@@ -36,6 +37,11 @@ export default new Router({
       path: '/songs',
       name: 'songs',
       component: Songs,
+    },
+    {
+      path: '/years',
+      name: 'years',
+      component: Years,
     },
   ],
 });

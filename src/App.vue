@@ -9,10 +9,21 @@
               <img class="responsive-image" alt="iTunes logo" src="./assets/itunes-small.png">
             </router-link>
           </li>
-          <li><router-link to="/genres">Genres</router-link></li>
-          <li><router-link to="/artists">Artists</router-link></li>
-          <li><router-link to="/albums">Albums</router-link></li>
-          <li><router-link to="/songs">Songs</router-link></li>
+          <li>
+            <router-link to="/genres">Genres</router-link>
+          </li>
+          <li>
+            <router-link to="/artists">Artists</router-link>
+          </li>
+          <li>
+            <router-link to="/albums">Albums</router-link>
+          </li>
+          <li>
+            <router-link to="/songs">Songs</router-link>
+          </li>
+          <li>
+            <router-link to="/years">Years</router-link>
+          </li>
         </ul>
       </div>
       <div class="top-bar-right">
@@ -34,14 +45,15 @@ export default {
   components: {
     Search,
     ItunesLibrary,
-    Results,
-  },
+    Results
+  }
 };
 </script>
 
 
 <style lang="stylus">
-@import "~foundation-sites/dist/css/foundation.css";
+@import '~foundation-sites/dist/css/foundation.css';
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
 }

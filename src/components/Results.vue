@@ -2,55 +2,90 @@
   <div>
     <div v-for="item in results" :key="item.id">
       <div class="song__item-wrapper" v-if="activeView == 'genre'">
-      <div class="accordion">
-        <a href="javascript:void(0);" class="accordion__title" data-accordion-title>{{item.genre}}</a>
-        <div class="accordion__content" data-accordion-content>
-        <div class="accordion__item" v-for="song in genreSongs(item.genre)" :key="song.id">
-          <a :href="youtubeUrl(song)" class="song__item">
-          <p><span class="song__title">{{song.title}}</span> - <span class="song__artist">{{song.artist}}</span></p>
-          <p class="song__album">{{song.album}}</p>
-          </a>
+        <div class="accordion">
+          <a href="javascript:void(0);" class="accordion__title" data-accordion-title>{{item.genre}}</a>
+          <div class="accordion__content" data-accordion-content>
+            <div class="accordion__item" v-for="song in genreSongs(item.genre)" :key="song.id">
+              <a :href="youtubeUrl(song)" class="song__item">
+                <p>
+                  <span class="song__title">{{song.title}}</span> -
+                  <span class="song__artist">{{song.artist}}</span>
+                </p>
+                <p class="song__album">{{song.album}}</p>
+              </a>
+            </div>
+          </div>
         </div>
-        </div>
-      </div>
       </div>
       <div class="song__item-wrapper" v-else-if="activeView == 'artist'">
-      <div class="accordion">
-        <a href="javascript:void(0);" class="accordion__title" data-accordion-title>{{item.artist}}</a>
-        <div class="accordion__content" data-accordion-content>
-        <div class="accordion__item" v-for="song in artistSongs(item.artist)" :key="song.id">
-          <a :href="youtubeUrl(song)" class="song__item">
-          <p><span class="song__title">{{song.title}}</span> - <span class="song__artist">{{song.artist}}</span></p>
-          <p class="song__album">{{song.album}}</p>
-          </a>
+        <div class="accordion">
+          <a
+            href="javascript:void(0);"
+            class="accordion__title"
+            data-accordion-title
+          >{{item.artist}}</a>
+          <div class="accordion__content" data-accordion-content>
+            <div class="accordion__item" v-for="song in artistSongs(item.artist)" :key="song.id">
+              <a :href="youtubeUrl(song)" class="song__item">
+                <p>
+                  <span class="song__title">{{song.title}}</span> -
+                  <span class="song__artist">{{song.artist}}</span>
+                </p>
+                <p class="song__album">{{song.album}}</p>
+              </a>
+            </div>
+          </div>
         </div>
-        </div>
-      </div>
       </div>
       <div class="song__item-wrapper" v-else-if="activeView == 'album'">
-      <div class="accordion">
-        <a href="javascript:void(0);" class="accordion__title" data-accordion-title>{{item.album}}</a>
-        <div class="accordion__content" data-accordion-content>
-        <div class="accordion__item" v-for="song in albumSongs(item.album)" :key="song.id">
-          <a :href="youtubeUrl(song)" class="song__item">
-          <p><span class="song__title">{{song.title}}</span> - <span class="song__artist">{{song.artist}}</span></p>
-          <p class="song__album">{{song.album}}</p>
-          </a>
+        <div class="accordion">
+          <a href="javascript:void(0);" class="accordion__title" data-accordion-title>{{item.album}}</a>
+          <div class="accordion__content" data-accordion-content>
+            <div class="accordion__item" v-for="song in albumSongs(item.album)" :key="song.id">
+              <a :href="youtubeUrl(song)" class="song__item">
+                <p>
+                  <span class="song__title">{{song.title}}</span> -
+                  <span class="song__artist">{{song.artist}}</span>
+                </p>
+                <p class="song__album">{{song.album}}</p>
+              </a>
+            </div>
+          </div>
         </div>
-        </div>
-      </div>
       </div>
       <div class="song__item-wrapper" v-else-if="activeView == 'title'">
-      <a :href="youtubeUrl(item)" class="song__item">
-        <p><span class="song__title">{{item.title}}</span> - <span class="song__artist">{{item.artist}}</span></p>
-        <p class="song__album">{{item.album}}</p>
-      </a>
+        <a :href="youtubeUrl(item)" class="song__item">
+          <p>
+            <span class="song__title">{{item.title}}</span> -
+            <span class="song__artist">{{item.artist}}</span>
+          </p>
+          <p class="song__album">{{item.album}}</p>
+        </a>
+      </div>
+      <div class="song__item-wrapper" v-else-if="activeView == 'year'">
+        <div class="accordion">
+          <a href="javascript:void(0);" class="accordion__title" data-accordion-title>{{item.year}}</a>
+          <div class="accordion__content" data-accordion-content>
+            <div class="accordion__item" v-for="song in yearSongs(item.year)" :key="song.id">
+              <a :href="youtubeUrl(song)" class="song__item">
+                <p>
+                  <span class="song__title">{{song.title}}</span> -
+                  <span class="song__artist">{{song.artist}}</span>
+                </p>
+                <p class="song__album">{{song.album}}</p>
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="song__item-wrapper" v-else-if="activeView == ''">
-      <a :href="youtubeUrl(item)" class="song__item">
-        <p><span class="song__title">{{item.title}}</span> - <span class="song__artist">{{item.artist}}</span></p>
-        <p class="song__album">{{item.album}}</p>
-      </a>
+        <a :href="youtubeUrl(item)" class="song__item">
+          <p>
+            <span class="song__title">{{item.title}}</span> -
+            <span class="song__artist">{{item.artist}}</span>
+          </p>
+          <p class="song__album">{{item.album}}</p>
+        </a>
       </div>
     </div>
   </div>
@@ -63,20 +98,13 @@ import $ from 'jquery';
 export default {
   name: 'results',
   computed: {
-    ...mapState([
-      'results',
-      'activeView'
-    ]),
-    ...mapGetters([
-      'genreSongs',
-      'artistSongs',
-      'albumSongs',
-    ])
+    ...mapState(['results', 'activeView']),
+    ...mapGetters(['genreSongs', 'artistSongs', 'albumSongs', 'yearSongs'])
   },
   mounted() {
     /* eslint-disable func-names */
     $(document).on('click', '[data-accordion-title]', function(e) {
-    /* eslint-enable func-names */
+      /* eslint-enable func-names */
       e.preventDefault();
       const $accordionTitle = $(this);
       const $accordionContent = $accordionTitle.next();
@@ -93,8 +121,14 @@ export default {
       return value.replace(' ', '+');
     },
     youtubeUrl(song) {
-      return 'https://www.youtube.com/results?search_query=' + this.escapeSpaces(song.title) + '+' + this.escapeSpaces(song.artist) + '&page=&utm_source=opensearch';
-    },
+      return (
+        'https://www.youtube.com/results?search_query=' +
+        this.escapeSpaces(song.title) +
+        '+' +
+        this.escapeSpaces(song.artist) +
+        '&page=&utm_source=opensearch'
+      );
+    }
   }
 };
 </script>
