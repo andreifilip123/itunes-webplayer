@@ -1,5 +1,7 @@
 # iTunes to Youtube converter
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/andreifilip123/itunes-webplayer.svg)](https://greenkeeper.io/)
+
 The app loads your iTunes library and gives you the YouTube link of each song through the UI.
 
 ## Getting Started
