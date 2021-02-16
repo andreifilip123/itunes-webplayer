@@ -1,0 +1,28 @@
+name: Build
+
+on:
+  push:
+    branches: [ master ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2.1.4
+        with:
+          node-version: 15.8.0
+
+      - name: Install node dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Lint the code
+        run: yarn lint
+        
+      - name: Build the code for production
+        run: yarn build
