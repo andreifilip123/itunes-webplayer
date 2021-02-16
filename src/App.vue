@@ -50,7 +50,6 @@ export default {
 };
 </script>
 
-
 <style lang="stylus">
 @import '~foundation-sites/dist/css/foundation.css';
 

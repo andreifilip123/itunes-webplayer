@@ -122,11 +122,11 @@ export default {
     },
     youtubeUrl(song) {
       return (
-        'https://www.youtube.com/results?search_query=' +
-        this.escapeSpaces(song.title) +
-        '+' +
-        this.escapeSpaces(song.artist) +
-        '&page=&utm_source=opensearch'
+        'https://www.youtube.com/results?search_query='
+        + this.escapeSpaces(song.title)
+        + '+'
+        + this.escapeSpaces(song.artist)
+        + '&page=&utm_source=opensearch'
       );
     }
   }

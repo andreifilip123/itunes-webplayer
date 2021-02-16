@@ -47,7 +47,7 @@ export const mutations = {
     const allLibrarySorted = allLibrary.sort((a, b) => {
       if (a.title > b.title) {
         return 1;
-      } else if (a.title < b.title) {
+      } if (a.title < b.title) {
         return -1;
       }
       return 0;
@@ -72,14 +72,14 @@ export const mutations = {
       if (state.activeView) {
         if (a[state.activeView] > b[state.activeView]) {
           return 1;
-        } else if (a[state.activeView] < b[state.activeView]) {
+        } if (a[state.activeView] < b[state.activeView]) {
           return -1;
         }
         return 0;
       }
       if (a.title > b.title) {
         return 1;
-      } else if (a.title < b.title) {
+      } if (a.title < b.title) {
         return -1;
       }
       return 0;
@@ -94,13 +94,12 @@ export const mutations = {
         }
         return item.title;
       }))
-    ].map(itemProperty =>
-      state.results.find(item => {
-        if (state.activeView) {
-          return item[state.activeView] == itemProperty;
-        }
-        return item.title == itemProperty;
-      }));
+    ].map(itemProperty => state.results.find(item => {
+      if (state.activeView) {
+        return item[state.activeView] == itemProperty;
+      }
+      return item.title == itemProperty;
+    }));
     state.results = unique;
   }
 };
