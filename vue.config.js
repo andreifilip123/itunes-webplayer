@@ -3,7 +3,7 @@ module.exports = {
   assetsDir: 'src',
   runtimeCompiler: true,
   css: {
-    modules: true,
+    requireModuleExtension: true,
     sourceMap: true
   }
 };
